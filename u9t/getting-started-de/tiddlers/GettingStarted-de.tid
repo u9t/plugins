@@ -1,0 +1,122 @@
+title: GettingStarted
+
+\define open-cp()
+<$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Appearance"/>
+<$action-setfield $tiddler="$:/state/tab--1963855381" text="$:/themes/tiddlywiki/vanilla/themetweaks"/>
+<$action-navigate $to="$:/ControlPanel"/>
+\end
+\define create-toc()
+<$action-setfield $tiddler="InhaltsVerzeichnis" list-after="$:/core/ui/SideBar/Open" caption="{{$:/language/SideBar/Contents/Caption}}" 
+text="""<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'Inhalt'>>
+
+</div>"""/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="InhaltsVerzeichnis"/>
+\end
+\define create-todos()
+<$action-setfield $tiddler="TaskDraggableTemplate" text="""<$checkbox tag="erledigt"> <$link to={{!!title}}><$view field="title"/></$link></$checkbox>"""/>
+<$action-setfield $tiddler="Tasks" 
+text="""!! Ausstehende Tasks
+
+<$button>
+<$action-sendmessage $message="tm-new-tiddler" title="Neuer Task" tags="task" />Neuer Task
+</$button>
+
+//Sortierung mit Drag&Drop anpassen!//
+
+<<list-tagged-draggable tag:"task" subFilter:"!has[draft.of]!tag[erledigt]" itemTemplate:"TaskDraggableTemplate" emptyMessage:"Alles erledigt - Gut gemacht!">>
+
+!! Erledigte Tasks
+
+<$list filter="[!has[draft.of]tag[task]tag[erledigt]!sort[modified]]">
+<div>
+<$checkbox tag="erledigt"> ~~<$link to={{!!title}}><$view field="title"/></$link>~~</$checkbox>
+</div>
+</$list>
+"""/>
+<$action-navigate $to="Tasks"/>
+\end
+\define lingo-base() $:/language/ControlPanel/Basics/
+Willkommen bei ~TiddlyWiki, einem persönlichen nicht-linearen Web-Notizbuch.
+
+Vor dem Start, vergewissern Sie sich, dass Sie dieses Wiki auch wirklich speichern können. Weitere Informationen finden Sie für:
+
+* Österreich: https://tiddlywiki.com/languages/de-AT
+* Deutschland: https://tiddlywiki.com/languages/de-DE
+* Allgemein (englisch): https://tiddlywiki.com 
+
+!! Einrichten dieses ~TiddlyWikis
+
+<div class="tc-control-panel">
+
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
+
+!! Weitere Einstellungen
+
+!!! "Home Button" Anzeigen
+
+<<<
+<$checkbox tiddler="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/home" checked="show" unchecked="hide" field="text"/> Option aktivieren um den {{$:/core/ui/Buttons/home}} "Home button" in der Navigationsleiste anzuzeigen.
+
+<$reveal state="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/home" type="match" text="show">
+Weitere "Buttons" für die Navigationsleiste können Sie unter dem Reiter: ''Tools'' finden
+</$reveal>
+<<<
+
+!!! "Journal Button" Anzeigen
+
+<<<
+<$checkbox tiddler="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-journal" checked="show" unchecked="hide" field="text"/> Option aktivieren um den {{$:/core/ui/Buttons/new-journal}} "Journal button" in der Navigationsleiste anzuzeigen
+
+<$reveal state="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-journal" type="match" text="show">
+Weitere "Journal" und "New Tiddler" Optionen können im {{$:/core/ui/Buttons/control-panel}} $:/ControlPanel '': Info : Basis'' verändert werden.
+</$reveal>
+<<<
+
+!!! Inhaltsverzeichnis Erstellen
+
+<<<
+<$checkbox checkactions=<<create-toc>>  tiddler="InhaltsVerzeichnis" tag="$:/tags/SideBar" /> Option aktivieren, um ein Inhaltsverzeichnis zu erstellen.
+
+<$reveal stateTitle="InhaltsVerzeichnis" type="match" stateField="tags" text="$:/tags/SideBar">
+
+Der ''tag'' für die "oberste" Ebene des Verzeichnisses ist: ''Inhalt''. <$button><$action-sendmessage $message="tm-new-tiddler" tags="Inhalt" />Inhaltsverezeichnis Erstellen</$button>
+
+><$checkbox tiddler="$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/new-here" checked="show" unchecked="hide" field="text"/> Option aktivieren, um den {{$:/core/ui/Buttons/new-here}} "Neu Hier" Button in der ''Tiddler Menüleiste'' anzuzeigen. Das erleichtert die Erstellung eine Verzeichnisstruktur.
+
+</$reveal>
+<<<
+
+!!! Einfache ~ToDo Liste
+
+<<<
+<$checkbox checkactions=<<create-todos>> tiddler="Tasks" tag="Inhalt" /> Eine "einfache" Aufgabenliste erstellen und im Navigationsbereich anzeigen.
+
+<$reveal stateTitle="Tasks" stateField="title" type="match" text="Tasks" default="x">
+
+<$checkbox  tiddler="Tasks" tag="$:/tags/SideBar" /> ''Tasks'' Reiter im rechten Menü anzeigen
+
+Weitere Informationen können unter [[tiddlywiki.com|https://tiddlywiki.com/#list-tagged-draggable%20Macro:%5B%5Blist-tagged-draggable%20Macro%5D%5D%20%5B%5BTaskManagementExample%20(Draggable)%5D%5D]] gefunden werden.
+</$reveal>
+<<<
+
+!!! "Story River" Ändern
+
+>Das "Layout" und weitere Einstellungen können im "Control Panel" verändert werden. 
+
+>Öffnen Sie: <$button actions=<<open-cp>> >~ControlPanel : Design : Theme Tweaks</$button> um die "Seitenleiste Darstellung" zu verändern.
+
+! Nächste Schritte
+
+* Erstellen Sie einen neuen Tiddler mit dem "Plus-Button" in der rechten Navigationsleiste.
+* Einstellungen können im [[Kontrollpanel|$:/ControlPanel]] vorgenommen werden. Siehe: "Zahnrad-Button" 
+** Das Anzeigen dieses Tiddlers können Sie verhindern, indem Sie die "~DefaultTiddlers" im ''Basis-Tab'' verändern.
+* Speichern wird mit dem "Speichern-Button" in der Navigationsleiste ausgelöst.
+* Österreich: [[Weitere Informationen zu WikiText|https://tiddlywiki.com/languages/de-AT/index.html#WikiText]]
+* Deutschland: [[Weitere Informationen zu WikiText|https://tiddlywiki.com/languages/de-DE/index.html#WikiText]]
+
+Hinweis: Die österreichische und deutsche Version unterscheiden sich momentan nur in der Flagge, die bei der Standard Sprachauswahl angezeigt wird. In Zukunft können Beschriftungen der Benutzeroberfläche geringfügig von einander abweichen. zB: Jänner - Januar.
