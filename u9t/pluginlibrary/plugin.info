@@ -1,6 +1,6 @@
 {
-	"title": "$:/plugins/ut9/pluginlibrary",
-	"name": "Unite (ut9) Plugin Library",
-	"description": "Unite (ut9) plugin library configuration",
+	"title": "$:/plugins/u9t/pluginlibrary",
+	"name": "Unite (u9t) Plugin Library",
+	"description": "Unite (u9t) plugin library configuration",
 	"list": "readme"
 }

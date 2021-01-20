@@ -6,13 +6,13 @@ title: GettingStarted
 <$action-navigate $to="$:/ControlPanel"/>
 \end
 \define create-toc()
-<$action-setfield $tiddler="InhaltsVerzeichnis" list-after="$:/core/ui/SideBar/Open" caption="{{$:/language/SideBar/Contents/Caption}}" 
+<$action-setfield $tiddler="Inhalt" list-after="$:/core/ui/SideBar/Open" caption="{{$:/language/SideBar/Contents/Caption}}" 
 text="""<div class="tc-table-of-contents">
 
 <<toc-selective-expandable 'Inhalt'>>
 
 </div>"""/>
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="InhaltsVerzeichnis"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="Inhalt"/>
 \end
 \define create-todos()
 <$action-setfield $tiddler="TaskDraggableTemplate" text="""<$checkbox tag="erledigt"> <$link to={{!!title}}><$view field="title"/></$link></$checkbox>"""/>
@@ -80,9 +80,9 @@ Weitere "Journal" und "New Tiddler" Optionen können im {{$:/core/ui/Buttons/con
 !!! Inhaltsverzeichnis Erstellen
 
 <<<
-<$checkbox checkactions=<<create-toc>>  tiddler="InhaltsVerzeichnis" tag="$:/tags/SideBar" /> Option aktivieren, um ein Inhaltsverzeichnis zu erstellen.
+<$checkbox checkactions=<<create-toc>>  tiddler="Inhalt" tag="$:/tags/SideBar" /> Option aktivieren, um ein Inhaltsverzeichnis zu erstellen.
 
-<$reveal stateTitle="InhaltsVerzeichnis" type="match" stateField="tags" text="$:/tags/SideBar">
+<$reveal stateTitle="Inhalt" type="match" stateField="tags" text="$:/tags/SideBar">
 
 Der ''tag'' für die "oberste" Ebene des Verzeichnisses ist: ''Inhalt''. <$button><$action-sendmessage $message="tm-new-tiddler" tags="Inhalt" />Inhaltsverezeichnis Erstellen</$button>
 

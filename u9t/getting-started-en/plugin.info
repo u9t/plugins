@@ -1,8 +1,8 @@
 {
 	"title": "$:/plugins/u9t/getting-started-en",
-	"description": "Deutsches GettingStarted mit einigen Extras",
+	"description": "English GettingStarted with some extras",
 	"author": "Mario Pietsch",
 	"core-version": ">=5.1.22",
-	"version": "0.1.0",
+	"version": "0.2.1",
 	"list": "readme history license"
 }
